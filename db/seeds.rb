@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Link.create!(url: "www.stumweb.com",
+			 title: "Stumweb: the front page of New York City!",
+			 comment: "nice website")
+Link.create!(url: "www.google.com",
+			 title: "Search Google now",
+			 comment: "google search")
+Link.create!(url: "www.facebook.com",
+			 title: "Find out what your friends are doing",
+			 comment: "facebook")

@@ -1,6 +1,9 @@
 Comments::Application.routes.draw do
 
-  root to: 'links#index'
+  resources :links
+
+
+  root to: 'comment#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,4 +1,15 @@
-var app = angular.module('links', []);
+var app = angular.module('links', ["ngResource"]);
+
+app.factory("Link", [
+  "$resource", function($resource) {
+    return $resource("/links", {}, {
+      update: {
+        method: "PUT"
+      }
+    });
+  }
+]);
+
 
 /* 
 app.factory('Links', function () {
@@ -23,26 +34,12 @@ app.factory('Links', function () {
 });
 */
 
-app.controller('LinksCtrl', function ($scope) {
-	$scope.links = [
-	{
-		url: "www.stumweb.com",
-		title: "Stumweb: the front page of New York City!",
-		comment: "nice website"
-	},
-	{
-		url: "www.google.com",
-		title: "Search Google now",
-		comment: "google search"
-	},
-	{
-		url: "www.facebook.com",
-		title: "Find out what your friends are doing",
-		comment: "facebook"
-	}];
+app.controller('LinksCtrl', function ($scope, Link) {
+	$scope.links = Link.query();
 
 	$scope.addLink = function () {
-		$scope.links.push($scope.newLink);
+		link = Link.save($scope.newLink)
+		$scope.links.push(link);
 		$scope.newLink = {};
 	}
 })
