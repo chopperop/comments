@@ -1,0 +1,1 @@
+This app integrates AngularJS with Ruby on Rails.
