@@ -1,4 +1,4 @@
-<h1>Links</h1>
+<h2>Post your favorite comments from the internet!</h2>
 <br>
 <div ng-controller="LinksCtrl">
 	<form>
@@ -13,11 +13,21 @@
 	</form>
 	<br>
 
-	<ul>
-		<li ng-repeat="link in links | filter:search">
-			<%= link_to "{{link.title}}", url_with_protocol("{{link.url}}"), target: '_blank' %>
-			<br>
-			<div bigger="panel" normal>{{link.comment}}</div>
-		</li>
-	</ul>
+	
+
+	<div id="scroller">
+		<ul id="link">
+			<li ng-repeat="link in links | filter:search">
+				<div class="hide-{{link.hide}}">
+					<%= link_to "{{link.title}}", url_with_protocol("{{link.url}}"), target: '_blank' %> 
+					<br>
+					<div bigger="panel" normal>{{link.comment}}</div>
+					Hide: <input type="checkbox" ng-model="link.hide">
+				</div>			
+			</li>
+		</ul>	
+	</div>
+<br>
+	<button class="btn-large" ng-click="hideHidden()"><i class="icon-trash"></i>Hide</button>
+	<button class="btn-large" ng-click="showHidden()"><i class="icon-trash"></i>Show</button>	
 </div>

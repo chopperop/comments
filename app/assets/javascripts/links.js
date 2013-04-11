@@ -10,39 +10,23 @@ app.factory("Link", [
   }
 ]);
 
-
-/* 
-app.factory('Links', function () {
-	var Links = {};
-	Links.all = [
-	{
-		url: "www.stumweb.com",
-		title: "Stumweb: the front page of New York City!",
-		comment: "nice website"
-	},
-	{
-		url: "www.google.com",
-		title: "Search Google now",
-		comment: "google search"
-	},
-	{
-		url: "www.facebook.com",
-		title: "Find out what your friends are doing",
-		comment: "facebook"
-	}];
-	return Links;
-});
-*/
-
-app.controller('LinksCtrl', function ($scope, Link) {
+app.controller('LinksCtrl', ["$scope", "Link", function ($scope, Link) {
 	$scope.links = Link.query();
 
 	$scope.addLink = function () {
 		link = Link.save($scope.newLink)
 		$scope.links.push(link);
 		$scope.newLink = {};
-	}
-})
+	};
+
+	$scope.hideHidden = function () {
+		$('.hide-true').hide();
+	};
+
+	$scope.showHidden = function () {
+		$('.hide-true').show();
+	};
+}]);
 
 app.directive('bigger', function () {
 	return function (scope, element, attrs) {
@@ -58,5 +42,23 @@ app.directive('normal', function () {
 			element.removeClass(attrs.bigger)
 		})
 	}
-})
+});
 
+angular.element(document).ready(function () {
+	var item = $('#scroller #link');
+	item.css({top:0});
+	var animator = function (imgblock) {
+		imgblock.animate(
+			{top:-350}, 10000,
+			function () {
+				imgblock.css({top:250});
+				animator($(this));
+			}
+		);
+	};
+	animator(item);
+	$(item).hover(
+		function () {$(this).stop()},
+		function () {animator(item)}
+	);
+});
