@@ -21,7 +21,7 @@
 				<div class="hide-{{link.hide}}">
 					<%= link_to "{{link.title}}", url_with_protocol("{{link.url}}"), target: '_blank' %> 
 					<br>
-					<div bigger="panel" normal>{{link.comment}}</div>
+					<div style="margin-left: 10px;" bigger="panel" normal>"{{link.comment}}"</div>
 					Hide: <input type="checkbox" ng-model="link.hide">
 				</div>			
 			</li>
